@@ -125,7 +125,7 @@ module DataMapper
         reader = connection.create_command(sql).execute_reader(*bind_values)
         begin
           while reader.next!
-            records << Hash[ reader.fields.zip(reader.values).slice(properties.field_map.keys) ]
+            records << Hash[ reader.fields.zip(reader.values).slice(*properties.field_map.keys) ]
           end
         ensure
           reader.close
