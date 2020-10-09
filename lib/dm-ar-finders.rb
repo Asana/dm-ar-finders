@@ -123,7 +123,7 @@ module DataMapper
 
       repository.adapter.send(:with_connection) do |connection|
         reader = connection.create_command(sql).execute_reader(*bind_values)
-        used_keys = Set.new(properties.field_map.keys)
+        used_keys = Set.new(properties.field_map)
         begin
           while reader.next!
             records << reader.fields.zip(reader.values).select { |field, value| used_keys.include?(field) }
