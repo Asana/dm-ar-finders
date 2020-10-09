@@ -126,7 +126,7 @@ module DataMapper
         used_keys = Set.new(properties.field_map)
         begin
           while reader.next!
-            records << reader.fields.zip(reader.values).select { |field, value| used_keys.include?(field) }
+            records << reader.fields.zip(reader.values).select { |field, value| used_keys.include?(field) }.to_h
           end
         ensure
           reader.close
